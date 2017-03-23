@@ -1,0 +1,24 @@
+{
+    "name": "v-axios",
+    "version": "1.0.1",
+    "description": "移植 axios 为 vue 插件，只为了更好的语义化。",
+    "main": "v-axios.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/xiaofan9/v-axios"
+    },
+    "keywords": [
+        "vue",
+        "axios",
+        "v-axios"
+    ],
+    "dependencies": {
+        "axios": "^0.15.3"
+    },
+    "author": "小凡",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/xiaofan9/v-axios/issues"
+    },
+    "homepage": "https://github.com/xiaofan9/v-axios"
+}
