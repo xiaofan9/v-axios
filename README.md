@@ -12,7 +12,7 @@ Not？Teach you a simple way to press the key combination command/Ctrl + F4.<br 
 > * npm
 
 ``` bash
-npm install --save v-axios
+npm install v-axios --save
 ```
 
 ```javascript
