@@ -19,11 +19,8 @@
 
         Vue.axios = axios; // 全局添加 ， 为了全局使用
 
-        Object.defineProperty(Vue.prototype, "$http", { // 添加 $http 属性 到实例中 
-            get() { // 使用 get 获取,默认不可遍历
-                return axios;
-            }
-        });
+        Vue.prototype.$http = axios;
+
         vAxios.installed = true;
     }
 
