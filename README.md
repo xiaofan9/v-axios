@@ -1,11 +1,9 @@
 # v-axios (基于axios(官方推荐ajax工具)的vue插件
-Can you read Chinese？<br />
-Not？Teach you a simple way to press the key combination command/Ctrl + F4.<br />
-没问题？请您继续阅读。。。
-
 由 axios 搬运而成的vue插件 --- v-axios<br />
-初衷就是让大家可以更语义的在 vue 引入 axios插件，小白必用。。。
+初衷就是让大家可以更语义的在 vue 引入 axios插件，以便更方便、快捷开发。
 
+## 计划
+  - 下一个版本将进行vue3.0兼容
 
 ## 安装 && 引入
 
@@ -16,6 +14,7 @@ npm install v-axios --save
 ```
 
 ```javascript
+import Vue from 'vue';
 import vAxios from 'v-axios';
 Vue.use(vAxios);
 ```
@@ -23,10 +22,8 @@ Vue.use(vAxios);
 > * 直接引入
 
 ```html
-<script src="./vue.js"></script>
-<script src="./v-axios.js"></script>
+<script src="https://unpkg.com/v-axios/v-axios.js"></script>
 ```
-
 
 ## 使用
 
@@ -63,7 +60,6 @@ this.$http.post('xxx', {
   console.log(err);
 });
 ```
-
 
 ## API
 

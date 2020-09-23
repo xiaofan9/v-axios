@@ -1,24 +1,47 @@
 {
-    "name": "v-axios",
-    "version": "1.0.3",
-    "description": "移植 axios 为 vue 插件，只为了更好的语义化。",
-    "main": "v-axios.js",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/xiaofan9/v-axios"
-    },
-    "keywords": [
-        "vue",
-        "axios",
-        "v-axios"
-    ],
-    "dependencies": {
-        "axios": "^0.15.3"
-    },
-    "author": "小凡",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/xiaofan9/v-axios/issues"
-    },
-    "homepage": "https://github.com/xiaofan9/v-axios"
+  "name": "v-axios",
+  "version": "1.0.4",
+  "description": "移植 axios 为 vue 插件，只为了更好的语义化。",
+  "main": "dist/v-axios.esm.js",
+  "module": "dist/v-axios.esm.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "typing": "index.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "index.d.ts"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xiaofan9/v-axios"
+  },
+  "keywords": [
+    "vue",
+    "axios",
+    "wrapper",
+    "v-axios",
+    "vue-axios"
+  ],
+  "dependencies": {
+    "axios": "^0.20.0",
+    "vue": "^2.6.12"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-clean": "^0.4.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-uglifyjs": "^0.6.2"
+  },
+  "author": "小凡",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xiaofan9/v-axios/issues"
+  },
+  "homepage": "https://github.com/xiaofan9/v-axios"
 }
