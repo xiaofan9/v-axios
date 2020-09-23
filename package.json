@@ -1,14 +1,13 @@
 {
   "name": "v-axios",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "移植 axios 为 vue 插件，只为了更好的语义化。",
   "main": "dist/v-axios.esm.js",
   "module": "dist/v-axios.esm.js",
-  "types": "index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "typing": "index.d.ts",
+  "typings": "index.d.ts",
   "files": [
     "dist",
     "src",

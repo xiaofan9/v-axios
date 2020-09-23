@@ -22,7 +22,7 @@ Vue.use(vAxios);
 > * 直接引入
 
 ```html
-<script src="https://unpkg.com/v-axios/v-axios.js"></script>
+<script src="https://unpkg.com/v-axios/dist/v-axios.min.js"></script>
 ```
 
 ## 使用
