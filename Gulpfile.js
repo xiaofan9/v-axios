@@ -21,6 +21,13 @@ function build() {
 
 function copy() {
   return src('src/module.js')
+    .pipe(babel({
+      presets: [
+        ['@babel/env', {
+          modules: false
+        }]
+      ]
+    }))
     .pipe(uglifyEs())
     .pipe(rename('v-axios.esm.js'))
     .pipe(dest('dist/'));

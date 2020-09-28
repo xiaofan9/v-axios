@@ -1,7 +1,7 @@
 {
   "name": "v-axios",
-  "version": "1.0.7",
-  "description": "v-axios，axios 在vue中更好的使用方式",
+  "version": "2.0.0",
+  "description": "v-axios，使你在vue中更简洁的使用axios",
   "main": "dist/v-axios.min.js",
   "module": "dist/v-axios.esm.js",
   "scripts": {
@@ -27,7 +27,7 @@
   ],
   "dependencies": {
     "axios": "^0.20.0",
-    "vue": "^2.6.12"
+    "vue": "^3.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",

@@ -1,1 +1,1 @@
-import Vue from"vue";import axios from"axios";var isInstall=!1;export default{install(){isInstall||(Vue.axios=axios,Vue.prototype.$http=axios,isInstall=!0)}};
+import axios from"axios";function VAxios(o){vAxios.installed||(o.axios=axios,o.config.globalProperties.$http=axios,vAxios.installed=!0)}export default VAxios;

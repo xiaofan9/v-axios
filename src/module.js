@@ -1,17 +1,15 @@
-import Vue from 'vue';
 import axios from 'axios';
 
-var isInstall = false;
-
-export default {
-  install() {
-    if(!isInstall) {
-       // 全局添加
-      Vue.axios = axios;
-
-      Vue.prototype.$http = axios;
-
-      isInstall = true;
-    }
+function VAxios(app) {
+  if (vAxios.installed) {
+    //防止重复注入插件
+    return;
   }
-};
+
+  app.axios = axios;
+  app.config.globalProperties.$http = axios;
+
+  vAxios.installed = true;
+}
+
+export default VAxios;

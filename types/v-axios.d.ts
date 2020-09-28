@@ -1,6 +1,4 @@
-import { PluginFunction } from "vue";
 import { AxiosStatic } from "axios";
+import { App } from "vue";
 
-export declare class VAxios {
-  static install: PluginFunction<AxiosStatic>;
-}
+export declare function VAxios(app: App): AxiosStatic;
