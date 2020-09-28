@@ -1,17 +1,18 @@
 {
   "name": "v-axios",
-  "version": "1.0.6",
-  "description": "移植 axios 为 vue 插件，只为了更好的语义化。",
-  "main": "dist/v-axios.esm.js",
+  "version": "1.0.7",
+  "description": "v-axios，axios 在vue中更好的使用方式",
+  "main": "dist/v-axios.min.js",
   "module": "dist/v-axios.esm.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "typings": "index.d.ts",
+  "typings": "types/index.d.ts",
+  "unpkg": "dist/v-axios.min.js",
   "files": [
-    "dist",
     "src",
-    "index.d.ts"
+    "dist/*.js",
+    "types/*.d.ts"
   ],
   "repository": {
     "type": "git",
@@ -35,6 +36,7 @@
     "gulp-babel": "^8.0.0",
     "gulp-clean": "^0.4.0",
     "gulp-rename": "^2.0.0",
+    "gulp-uglify-es": "^2.0.0",
     "gulp-uglifyjs": "^0.6.2"
   },
   "author": "小凡",

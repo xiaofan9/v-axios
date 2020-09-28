@@ -1,4 +1,6 @@
-import { PluginFunction } from "vue";
+/**
+ * Augment the typings of Vue.js
+ */
 import { AxiosStatic } from "axios";
 
 declare module "vue/types/vue" {
@@ -10,9 +12,3 @@ declare module "vue/types/vue" {
     axios: AxiosStatic;
   }
 }
-
-declare class VueAxios {
-  static install: PluginFunction<AxiosStatic>;
-}
-
-export default VueAxios;

@@ -1,4 +1,4 @@
-# v-axios (基于axios(官方推荐ajax工具)的vue插件
+# v-axios
 由 axios 搬运而成的vue插件 --- v-axios<br />
 初衷就是让大家可以更语义的在 vue 引入 axios插件，以便更方便、快捷开发。
 
