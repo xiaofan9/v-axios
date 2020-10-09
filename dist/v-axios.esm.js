@@ -1,1 +1,1 @@
-import axios from"axios";function VAxios(o){vAxios.installed||(o.axios=axios,o.config.globalProperties.$http=axios,vAxios.installed=!0)}export default VAxios;
+import axios from"axios";function VAxios(o,i){vAxios.installed||(o.axios=i||axios,o.config.globalProperties.$http=i||axios,vAxios.installed=!0)}export default VAxios;
