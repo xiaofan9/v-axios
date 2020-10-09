@@ -1,1 +1,1 @@
-import Vue from"vue";import axios from"axios";var isInstall=!1;export default{install(){isInstall||(Vue.axios=axios,Vue.prototype.$http=axios,isInstall=!0)}};
+import axios from"axios";var isInstall=!1;export default{install(s,a){isInstall||(s.axios=a||axios,s.prototype.$http=a||axios,isInstall=!0)}};
