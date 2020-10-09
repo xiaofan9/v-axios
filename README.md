@@ -3,7 +3,14 @@
 初衷就是让大家可以更语义的在 vue 引入 axios插件，以便更方便、快捷开发。
 
 ## 兼容
-  - 当前版本仅支持vue3.0+
+
+|VueJS \ VueAxios|1.x|2.x|
+|-|-|-|-|
+|2.x|&#10004;|&#10060;|
+|3.x|&#10060;|&#10004;|
+
+## 计划
+3.0 将同时支持 vue 2、3
 
 ## 安装 && 引入
 
@@ -14,9 +21,25 @@ npm install v-axios --save
 ```
 
 ```javascript
-import Vue from 'vue';
 import vAxios from 'v-axios';
-Vue.use(vAxios);
+import axios from 'axios';
+```
+
+使用 Vue 2:
+
+```javascript
+// 第二个参数可选
+Vue.use(VueAxios, axios?);
+```
+
+使用 Vue 3:
+
+```javascript
+import { createApp } from 'vue';
+
+const app = createApp(...);
+// 第二个参数可选
+app.use(vAxios, axios?);
 ```
 
 > * 直接引入
@@ -27,7 +50,7 @@ Vue.use(vAxios);
 
 ## 使用
 
-Vue.axios 或 this.$http 均可调用
+app.axios 或 this.$http 均可调用
 
 你应该像下面一样使用：
 

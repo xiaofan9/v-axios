@@ -1,7 +1,7 @@
 (function () {
   var axios = typeof require === "function" ? require("axios") : window.axios;
 
-  function vAxios() {
+  function vAxios(app, axios_) {
     if (!axios) return console.error("你没有安装或者卸载了 axios，本插件依赖于 axios！");
 
     if (vAxios.installed) {
@@ -9,8 +9,8 @@
       return;
     }
 
-    app.axios = axios;
-    app.config.globalProperties.$http = axios;
+    app.axios = axios_ || axios;
+    app.config.globalProperties.$http = axios_ || axios;
 
     vAxios.installed = true;
   }
