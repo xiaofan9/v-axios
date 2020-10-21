@@ -1,31 +1,53 @@
-(function () {
-  var axios = typeof require === "function" ? require("axios") : window.axios;
+if (!String.prototype.startsWith) {
+  Object.defineProperty(String.prototype, 'startsWith', {
+      value: function(search, pos) {
+          pos = !pos || pos < 0 ? 0 : +pos;
+          return this.substring(pos, pos + search.length) === search;
+      }
+  });
+}
 
-  function vAxios(app, axios_) {
-    if (!axios) return console.error("你没有安装或者卸载了 axios，本插件依赖于 axios！");
+let vueVersion = window?.Vue?.version || '';
 
-    if (vAxios.installed) {
-      //防止重复注入插件
-      return;
+function vAxios(app, axios) {
+  if (vAxios.installed) {
+    //防止重复注入插件
+    return;
+  }
+
+  let tmpAxios = axios;
+
+  if(!tmpAxios) {
+    if(typeof window !== 'undefined' && window.axios) {
+      tmpAxios = window.axios;
+    } else if(require) {
+      tmpAxios = require('axios');
     }
-
-    app.axios = axios_ || axios;
-    app.config.globalProperties.$http = axios_ || axios;
-
-    vAxios.installed = true;
   }
 
-  // comJs
-  if (typeof exports == "object") {
-    module.exports = vAxios;
-  } else if (typeof define == "function" && define.amd) {
-    // amd
-    define([], function () {
-      return vAxios;
-    });
-  } else if (window.Vue) {
-    // 浏览器引入，自动注册插件
-    window.vAxios = vAxios;
-    Vue.use(vAxios);
+  if(!tmpAxios) {
+    return console.error("你没有安装或者卸载了 axios，本插件依赖于 axios！")
   }
-})();
+
+  const vueVersion = app?.version || '';
+  
+  if(vueVersion?.startsWith('3.') && typeof app === 'object') {
+    app.config.globalProperties.$http = tmpAxios;
+  }
+
+  if(vueVersion?.startsWith('2.') && typeof app === 'function') {
+    app.prototype.$http = tmpAxios;
+  }
+  
+  app.axios = tmpAxios;
+  vAxios.installed = true;
+}
+
+/* istanbul ignore if */
+if (typeof window !== 'undefined' && window.axios && window.Vue) {
+  if(vueVersion?.startsWith('2.')) {
+    vAxios(window.Vue, window.axios);
+  }
+}
+
+export default vAxios;

@@ -1,42 +1,50 @@
+const { src, dest, series } = require("gulp");
+const babel = require("gulp-babel");
+const rename = require("gulp-rename");
+const clean = require("gulp-clean");
+const uglifyEs = require("gulp-uglify-es").default;
+const umd = require("gulp-umd");
 
+function min(isEsm) {
+  const stream = src("src/index.js")
+    .pipe(
+      babel({
+        presets: ["@babel/env"],
+      })
+    )
+    .pipe(
+      umd({
+        exports: () => "vAxios",
+        namespace: () => "vAxios",
+      })
+    );
 
-const { src, dest, series } = require('gulp');
-const babel = require('gulp-babel');
-const uglify = require('gulp-uglifyjs');
-const rename = require('gulp-rename');
-const clean = require('gulp-clean');
-const uglifyEs = require('gulp-uglify-es').default;
-
-function build() {
-  return src('src/index.js', { allowEmpty: true })
-    .pipe(babel({
-      presets: [
-        '@babel/env'
-      ]
-    }))
-    .pipe(uglify())
-    .pipe(rename('v-axios.min.js'))
-    .pipe(dest('dist/'));
+  return output(stream);
 }
 
-function copy() {
-  return src('src/module.js')
-    .pipe(babel({
-      presets: [
-        ['@babel/env', {
-          modules: false
-        }]
-      ]
-    }))
-    .pipe(uglifyEs())
-    .pipe(rename('v-axios.esm.js'))
-    .pipe(dest('dist/'));
+function esm() {
+  const stream = src("src/index.js").pipe(
+    babel({
+      presets: [["@babel/env", { modules: false }]],
+    })
+  );
+
+  return output(stream, true);
+}
+
+function output(stream, isEsm) {
+  return stream
+    // .pipe(uglifyEs())
+    .pipe(rename("v-axios." + (isEsm ? "esm" : "min") + ".js"))
+    .pipe(dest("dist/"));
 }
 
 function clear() {
-  return src('dist/*').pipe(clean({
-    force: true
-  }));
+  return src("dist/*").pipe(
+    clean({
+      force: true,
+    })
+  );
 }
 
-exports.default = series(clear, build, copy)
+exports.default = series(clear, min, esm);

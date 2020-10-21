@@ -4,13 +4,13 @@
 
 ## 兼容
 
-|VueJS \ VueAxios|1.x|2.x|
-|-|-|-|
-|2.x|&#10004;|&#10060;|
-|3.x|&#10060;|&#10004;|
+|VueJS \ VueAxios|1.x|2.x|3.x|
+|-|-|-|-|
+|2.x|&#10004;|&#10060;|&#10004;|
+|3.x|&#10060;|&#10004;|&#10004;|
 
-## 计划
-3.0 将同时支持 vue 2、3
+## 建议
+使用3.0版本，支持vue2、vue3
 
 ## 安装 && 引入
 
@@ -22,6 +22,7 @@ npm install v-axios --save
 
 ```javascript
 import vAxios from 'v-axios';
+// 不引入这个将自动注入axios
 import axios from 'axios';
 ```
 
@@ -29,7 +30,7 @@ import axios from 'axios';
 
 ```javascript
 // 第二个参数可选
-Vue.use(VueAxios, axios?);
+Vue.use(VueAxios, [, axios]);
 ```
 
 使用 Vue 3:
@@ -39,13 +40,14 @@ import { createApp } from 'vue';
 
 const app = createApp(...);
 // 第二个参数可选
-app.use(vAxios, axios?);
+app.use(vAxios[, axios]);
 ```
 
 > * 直接引入
 
 ```html
-<script src="https://unpkg.com/v-axios/dist/v-axios.min.js"></script>
+<script src="https://unpkg.com/v-axios"></script>
+<script src="https://unpkg.com/axios"></script>
 ```
 
 ## 使用
