@@ -1,6 +1,6 @@
 {
   "name": "v-axios",
-  "version": "3.0.0-beta",
+  "version": "3.0.0-beta.1",
   "description": "v-axios，使你在vue中更简洁的使用axios",
   "main": "dist/v-axios.min.js",
   "module": "dist/v-axios.esm.js",
@@ -30,14 +30,13 @@
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
+    "@babel/plugin-transform-modules-umd": "^7.12.1",
     "@babel/preset-env": "^7.11.5",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
     "gulp-clean": "^0.4.0",
     "gulp-rename": "^2.0.0",
-    "gulp-uglify-es": "^2.0.0",
-    "gulp-uglifyjs": "^0.6.2",
-    "gulp-umd": "^2.0.0"
+    "gulp-uglify-es": "^2.0.0"
   },
   "author": "小凡",
   "license": "MIT",
