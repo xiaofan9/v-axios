@@ -3,6 +3,7 @@ const babel = require("gulp-babel");
 const rename = require("gulp-rename");
 const clean = require("gulp-clean");
 const uglifyEs = require("gulp-uglify-es").default;
+const umd = require("gulp-umd");
 
 function min(isEsm) {
   const stream = src("src/index.js")
@@ -11,9 +12,18 @@ function min(isEsm) {
         presets: [
           "@babel/env"
         ],
-        plugins: ["@babel/plugin-transform-modules-umd"]
+        plugins: [["@babel/plugin-transform-modules-umd", {
+          globals: {
+            'index': "vAxios"
+          },
+          "exactGlobals": true
+        }]]
       })
     )
+    // .pipe(umd({
+    //   exports: () => 'vAxios',
+    //   namespace: () => 'vAxios'
+    // }))
 
   return output(stream);
 }
