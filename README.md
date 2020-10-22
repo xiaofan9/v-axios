@@ -32,7 +32,7 @@ import axios from 'axios';
 
 ```javascript
 // 第二个参数可选
-Vue.use(VueAxios, [, axios]);
+Vue.use(VueAxios[, axios]);
 ```
 
 使用 Vue 3:
@@ -48,8 +48,8 @@ app.use(vAxios[, axios]);
 > * 直接引入
 
 ```html
-<script src="https://unpkg.com/v-axios"></script>
 <script src="https://unpkg.com/axios"></script>
+<script src="https://unpkg.com/v-axios"></script>
 ```
 
 ## 使用
