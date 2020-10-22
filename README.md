@@ -1,10 +1,12 @@
 # v-axios
-由 axios 搬运而成的vue插件 --- v-axios<br />
+
+## 简介
+由 axios 搬运而成的vue插件【别名：[vue-axios3](https://www.npmjs.com/package/vue-axios3)】<br />
 初衷就是让大家可以更语义的在 vue 引入 axios插件，以便更方便、快捷开发。
 
 ## 兼容
 
-|VueJS \ VueAxios|1.x|2.x|3.x|
+|Vue \ vAxios|1.x|2.x|3.x|
 |-|-|-|-|
 |2.x|&#10004;|&#10060;|&#10004;|
 |3.x|&#10060;|&#10004;|&#10004;|
