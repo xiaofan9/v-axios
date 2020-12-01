@@ -1,4 +1,5 @@
 import { AxiosStatic } from "axios";
+// @ts-ignore
 import { App, PluginFunction } from "vue";
 
 export declare class VAxios {
@@ -6,4 +7,4 @@ export declare class VAxios {
   static install (app: PluginFunction<never>, axios?: AxiosStatic): void;
 
   static version: string
-};
+}
