@@ -1,12 +1,4 @@
-if (!String.prototype.startsWith) {
-  Object.defineProperty(String.prototype, "startsWith", {
-    value: function (search, pos) {
-      pos = !pos || pos < 0 ? 0 : +pos;
-      return this.substring(pos, pos + search.length) === search;
-    },
-  });
-}
-
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import pkg from "../package.json";
 
 const version = pkg.version;
@@ -14,7 +6,7 @@ const vueVersion = window?.Vue?.version || "";
 const cancelList = new Map();
 const queryMethodList = ["get", "delete", "head", "options"];
 
-let axios, instance, request, get, post, reqInterceptor, resInterceptor;
+let axios, axios_, request, get, post, reqInterceptor, resInterceptor;
 
 getAxios();
 
@@ -22,24 +14,24 @@ const CancelToken = axios.CancelToken;
 
 cAxios();
 
-function getAxios(axios_) {
-  axios = axios_;
+function getAxios(axios) {
+  axios_ = axios;
 
-  if (!axios) {
+  if (!axios_) {
     if (typeof window !== "undefined" && window.axios) {
-      axios = window.axios;
+      axios_ = window.axios;
     } else if (require) {
-      axios = require("axios");
+      axios_ = require("axios");
     }
   }
 
-  if (!axios) {
+  if (!axios_) {
     console.error("你没有安装或者卸载了 axios，本插件依赖于 axios！");
 
     return;
   }
 
-  return axios;
+  return axios_;
 }
 
 function register(app, axios) {
@@ -57,7 +49,7 @@ function register(app, axios) {
 }
 
 function install(app, axios) {
-  let tmpAxios = getAxios(axios);
+  const tmpAxios = getAxios(axios);
 
   if (!tmpAxios) {
     return;
@@ -66,22 +58,26 @@ function install(app, axios) {
   register(app, tmpAxios);
 }
 
+function handleDelCancelList(config) {
+  const key = config.method + ": " + config.url;
+
+  cancelList.delete(key);
+}
+
 function cancelRepeat(axios) {
   reqInterceptor = axios.interceptors.request.use([
     (config) => {
-      if (isCancelRepeat) {
-        const source = CancelToken.source();
-        const key = config.method + ": " + config.url;
+      const source = CancelToken.source();
+      const key = config.method + ": " + config.url;
 
-        if (cancelList.has(key)) {
-          const source = cancelList.get(key);
+      if (cancelList.has(key)) {
+        const source = cancelList.get(key);
 
-          source.cancel("取消重复的请求，" + key);
-        }
-
-        cancelList.set(key, source);
-        config.cancelToken = source.token;
+        source.cancel("取消重复的请求，" + key);
       }
+
+      cancelList.set(key, source);
+      config.cancelToken = source.token;
 
       return Promise.resolve(config);
     },
@@ -91,7 +87,7 @@ function cancelRepeat(axios) {
     (res) => {
       const config = res.config;
 
-      handleDelReqList(config);
+      handleDelCancelList(config);
 
       return Promise.resolve(res);
     },
@@ -99,7 +95,7 @@ function cancelRepeat(axios) {
       const config = err.config;
 
       if (config) {
-        handleDelReqList(config);
+        handleDelCancelList(config);
       }
 
       return Promise.reject(err);
@@ -108,29 +104,29 @@ function cancelRepeat(axios) {
 }
 
 function cAxios(config) {
-  if(instance) {
-    if(reqInterceptor) {
-      instance.interceptors.request.eject(instance);
+  if (axios) {
+    if (reqInterceptor) {
+      axios.interceptors.request.eject(reqInterceptor);
     }
-    if(resInterceptor) {
-      instance.interceptors.response.eject(resInterceptor);
+    if (resInterceptor) {
+      axios.interceptors.response.eject(resInterceptor);
     }
   }
 
   const isCancelRepeat = config.cancelRepeat || false;
-  instance = axios.create(config || {});
-  instance.prototype.all = axios.all;
-  instance.prototype.spread = axios.spread;
+  axios = axios_.create(config || {});
+  axios.prototype.all = axios_.all;
+  axios.prototype.spread = axios_.spread;
 
-  if(isCancelRepeat) {
-    cancelRepeat(instance);
+  if (isCancelRepeat) {
+    cancelRepeat(axios);
   }
 
   request = (url, method) => {
     const isQuery = queryMethodList.includes(method.toLocaleLowerCase());
 
-    return (data = {}, opts = {}): AxiosPromise => {
-      return instance({
+    return (data = {}, opts = {}) => {
+      return axios({
         url,
         method,
         ...(isQuery ? { params: data } : { data }),
@@ -146,7 +142,7 @@ function cAxios(config) {
     request,
     get,
     post,
-    axios: instance,
+    axios,
   };
 }
 
@@ -162,4 +158,4 @@ export default {
   version,
 };
 
-export { install, cAxios, version, axios: instance, request, get, post };
+export { install, cAxios, version, axios, request, get, post };
