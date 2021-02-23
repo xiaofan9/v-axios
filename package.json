@@ -1,12 +1,12 @@
 {
   "name": "v-axios",
-  "version": "3.0.4-beta.00",
+  "version": "3.0.4-beta.0",
   "description": "v-axios，使你在vue中更简洁的使用axios",
   "main": "dist/v-axios.min.js",
   "module": "dist/v-axios.esm.js",
   "scripts": {
     "build": "node ./build/build.js",
-    "build:publish": "npm run build && npm run publish --tag=beta"
+    "build:publish": "npm run build && npm publish --tag=beta"
   },
   "typings": "types/index.d.ts",
   "unpkg": "dist/v-axios.min.js",
