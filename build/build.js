@@ -1,5 +1,4 @@
 /* eslint-disable */
-const vue = require("rollup-plugin-vue")
 const rollup = require("rollup")
 const chalk = require("chalk")
 const path = require("path")
@@ -8,14 +7,13 @@ const { nodeResolve } = require("@rollup/plugin-node-resolve")
 const { terser } = require("rollup-plugin-terser")
 const { default: babel, getBabelOutputPlugin } = require("@rollup/plugin-babel")
 const cjs = require("@rollup/plugin-commonjs")
-const typescript = require("rollup-plugin-typescript2")
 const pkg = require("../package.json")
 const { DEFAULT_EXTENSIONS } = require('@babel/core')
 const replace = require('@rollup/plugin-replace')
 
 const deps = Object.keys(Object.assign({}, pkg.dependencies))
 const foldPath = path.resolve(__dirname, `..`)
-const input = path.resolve(foldPath, "src/index.ts")
+const input = path.resolve(foldPath, "src/index.js")
 const outputConfig = {
   esm: {
     format: "esm",
@@ -24,9 +22,9 @@ const outputConfig = {
   umd: {
     format: "umd",
     file: path.resolve(foldPath, `dist/${pkg.name}.js`),
-    name: "CAXIOS",
+    name: "CAxios",
     globals: {
-      vue: "Vue"
+      axios: "Axios"
     },
     exports: "named"
   }
@@ -42,16 +40,6 @@ const runBuild = async () => {
 
   async function build(name) {
     if (!name) return
-    const extPlugins =
-      name === "esm"
-        ? []
-        : [
-            cjs({
-              // 开启混合模式转换
-              transformMixedEsModules: true,
-              sourceMap: false
-            })
-          ]
 
     const extTerserOpt =
       name === "esm"
@@ -69,21 +57,22 @@ const runBuild = async () => {
     const inputOptions = {
       input,
       plugins: [
-        typescript(),
-        replace({
-          'process.env.NODE_ENV': JSON.stringify('development'),
-          'process.env.VUE_ENV': JSON.stringify('browser')
-        }),
         nodeResolve({
           extensions: [".mjs", ".js", ".json", ".node", ...commonExtensions]
         }),
-        vue(),
+        cjs({
+          // 开启混合模式转换
+          transformMixedEsModules: true,
+          sourceMap: false
+        }),
+        replace({
+          'process.env.NODE_ENV': JSON.stringify('production')
+        }),
         babel({
           babelHelpers: "runtime",
           extensions: [...DEFAULT_EXTENSIONS, ...commonExtensions]
         }),
         json(),
-        ...extPlugins,
         terser(
           Object.assign(
             {
@@ -96,11 +85,7 @@ const runBuild = async () => {
         )
       ],
       external(id) {
-        return name === "umd" ? /^vue$/.test(id) : deps.some(k => {
-          // if(id.includes('vue') && k !== id && k === 'vue') {
-          //   return false
-          // }
-
+        return name === "umd" ? /^axios$/.test(id) : deps.some(k => {
           return new RegExp("^" + k).test(id)
         })
       }

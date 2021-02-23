@@ -13,7 +13,7 @@ declare module "@vue/runtime-core" {
   }
 }
 
-declare module 'vue/types/vue' {
+declare module "vue/types/vue" {
   interface Vue {
     $http: AxiosStatic;
   }

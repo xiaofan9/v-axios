@@ -55,6 +55,7 @@ function install(app, axios) {
     return;
   }
 
+  cAxios();
   register(app, tmpAxios);
 }
 
@@ -115,6 +116,12 @@ function cAxios(config) {
 
   const isCancelRepeat = config.cancelRepeat || false;
   axios = axios_.create(config || {});
+
+  // 为实例手动添加 methods
+  axios.prototype.create = axios_.create;
+  axios.prototype.Cancel = axios_.Cancel;
+  axios.prototype.CancelToken = axios_.CancelToken;
+  axios.prototype.isCancel = axios_.isCancel;
   axios.prototype.all = axios_.all;
   axios.prototype.spread = axios_.spread;
 
