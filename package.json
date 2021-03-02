@@ -1,6 +1,6 @@
 {
   "name": "v-axios",
-  "version": "3.0.4-beta.1",
+  "version": "3.0.4-beta.2",
   "description": "v-axios，使你在vue中更简洁的使用axios",
   "main": "dist/v-axios.js",
   "module": "dist/v-axios.esm.js",
