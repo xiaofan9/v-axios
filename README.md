@@ -91,3 +91,8 @@ this.$http.post('xxx', {
 ## API
 
 参看 - [axios api](https://github.com/mzabriskie/axios)
+
+
+## 文档
+
+[点击查看](https://www.yuque.com/pingfan-mm82t/iqx0qm/xmrcwc)
