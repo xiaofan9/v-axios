@@ -6,7 +6,7 @@
   "module": "dist/v-axios.esm.js",
   "scripts": {
     "build": "node ./build/build.js",
-    "build:publish": "npm run build && npm publish"
+    "build:publish": "npm run build && npm publish --tag beta"
   },
   "typings": "types/index.d.ts",
   "unpkg": "dist/v-axios.js",
