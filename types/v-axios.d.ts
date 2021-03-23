@@ -28,7 +28,7 @@ export declare const version: string;
 
 export declare const axios: AxiosStatic;
 
-export declare function cAxios(config?: AxiosRequestConfig, axios: AxiosStatic): CAxiosResult;
+export declare function cAxios(config?: AxiosRequestConfig, axios?: AxiosStatic): CAxiosResult;
 
 export declare class VAxios {
   static install: install;
