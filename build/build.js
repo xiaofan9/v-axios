@@ -10,6 +10,8 @@ const cjs = require("@rollup/plugin-commonjs")
 const pkg = require("../package.json")
 const { DEFAULT_EXTENSIONS } = require('@babel/core')
 const replace = require('@rollup/plugin-replace')
+const cleanup = require('rollup-plugin-cleanup')
+const rm = require("rimraf");
 
 const deps = Object.keys(Object.assign({}, pkg.dependencies))
 const foldPath = path.resolve(__dirname, `..`)
@@ -36,7 +38,14 @@ const runBuild = async () => {
   const outputKeyList = Object.keys(outputConfig)
   let index = 0
 
-  build(outputKeyList[index])
+  rm(
+    path.resolve(__dirname, '../dist'),
+    async err => {
+      if (err) throw err;
+
+      build(outputKeyList[index])
+    }
+  );
 
   async function build(name) {
     if (!name) return
@@ -73,6 +82,7 @@ const runBuild = async () => {
           extensions: [...DEFAULT_EXTENSIONS, ...commonExtensions]
         }),
         json(),
+        cleanup(),
         terser(
           Object.assign(
             {
