@@ -1,17 +1,16 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { AxiosStatic, AxiosInstance, AxiosRequestConfig } from "axios";
+import { AxiosStatic, AxiosRequestConfig, Method } from "axios";
 
-interface result {
+declare interface result {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   <T>(data: T, opt?: AxiosRequestConfig): Promise<any>;
 }
 
-export declare function request(url: string, method: string): result;
+declare function request(url: string, method: Method): result;
 
-export declare function get(url: string): result;
+declare function get(url: string): result;
 
-export declare const axios: AxiosStatic;
-
-export declare function post(url: string): result;
+declare function post(url: string): result;
 
 export type CAxiosResult = {
   request: typeof request;
@@ -20,16 +19,18 @@ export type CAxiosResult = {
   axios: AxiosStatic;
 };
 
-export interface install {
-  (app: any, axios?: AxiosStatic | AxiosInstance): void;
+export declare interface install {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (app: any, axios?: AxiosStatic): void;
 }
 
 export declare const version: string;
 
-export declare function cAxios(config?: AxiosRequestConfig): CAxiosResult;
+export declare const axios: AxiosStatic;
+
+export declare function cAxios(config?: AxiosRequestConfig, axios: AxiosStatic): CAxiosResult;
 
 export declare class VAxios {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static install: install;
 
   static version: typeof version;

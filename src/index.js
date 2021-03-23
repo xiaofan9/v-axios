@@ -7,10 +7,7 @@ const queryMethodList = ["get", "delete", "head", "options"];
 
 let reqInterceptor,
   resInterceptor,
-  httpObj,
-  axios_ = getAxios(),
-  isVueInstall = false;
-let { request, get, post, axios } = (httpObj = cAxios());
+  axios_ = getAxios();
 
 function getAxios(axios) {
   let axios_ = axios;
@@ -49,16 +46,6 @@ function install(app, axios) {
 
   if (!tmpAxios) {
     return;
-  }
-
-  if (axios) {
-    isVueInstall = true;
-
-    setTimeout(() => {
-      isVueInstall = false;
-    }, 0);
-
-    cAxios({}, axios);
   }
 
   register(app, tmpAxios);
@@ -116,14 +103,14 @@ function cancelRepeat(axios) {
 
 function cAxios(config = {}, axios) {
   const isCancelRepeat = config.cancelRepeat || false;
-  const obj = isVueInstall ? httpObj : {};
+  const obj = {};
 
   if (axios) {
     obj.axios = axios;
   }
 
   if (!obj.axios) {
-    const axios = (obj.axios = axios_.create(config || {}));
+    const axios = (obj.axios = axios_.create(config));
 
     // 为实例手动添加 methods
     axios.prototype.create = axios_.create;
@@ -153,8 +140,8 @@ function cAxios(config = {}, axios) {
     };
   };
 
-  obj.get = (url) => request(url, "get");
-  obj.post = (url) => request(url, "post");
+  obj.get = (url) => obj.request(url, "get");
+  obj.post = (url) => obj.request(url, "post");
 
   return obj;
 }
@@ -173,4 +160,6 @@ export default {
   version,
 };
 
-export { install, cAxios, version, axios, request, get, post };
+export const axios = axios_;
+
+export { install, cAxios, version };
