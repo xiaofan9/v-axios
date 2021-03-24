@@ -1,6 +1,6 @@
 {
   "name": "v-axios",
-  "version": "3.0.5-beta.2",
+  "version": "3.0.5-beta.3",
   "description": "v-axios，使你在vue中更简洁的使用axios",
   "main": "dist/v-axios.js",
   "module": "dist/v-axios.esm.js",
@@ -26,8 +26,8 @@
     "v-axios",
     "vue-axios"
   ],
-  "dependencies": {
-    "axios": "^0.20.0"
+  "peerDependencies": {
+    "axios": "^0.17.1"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
@@ -41,6 +41,7 @@
     "@rollup/plugin-replace": "^2.3.4",
     "@typescript-eslint/eslint-plugin": "^4.14.2",
     "@typescript-eslint/parser": "^4.14.2",
+    "axios": "^0.21.1",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-import": "^2.22.1",
