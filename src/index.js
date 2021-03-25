@@ -136,14 +136,23 @@ function cAxios(config = {}, axios) {
           ...(isQuery ? { params: data } : { data }),
           ...opts,
         })
-        .then(({ data = {} }) => data);
+        .then((res = {}) => {
+          const data = res?.data ?? {};
+          data.__$res = res;
+
+          return data;
+        });
     };
   };
 
   obj.get = (url) => obj.request(url, "get");
   obj.post = (url) => obj.request(url, "post");
 
-  return obj;
+  return {
+    get: obj.get,
+    post: obj.post,
+    request: obj.request,
+  };
 }
 
 // window环境且vue版本为2.x，自动注册；

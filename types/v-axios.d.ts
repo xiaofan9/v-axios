@@ -3,7 +3,7 @@ import { AxiosStatic, AxiosRequestConfig, Method } from "axios";
 
 declare interface result {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  <T>(data: T, opt?: AxiosRequestConfig): Promise<any>;
+  <T = any>(data?: T, opt?: AxiosRequestConfig): Promise<any>;
 }
 
 declare function request(url: string, method: Method): result;
@@ -28,7 +28,10 @@ export declare const version: string;
 
 export declare const axios: AxiosStatic;
 
-export declare function cAxios(config?: AxiosRequestConfig, axios?: AxiosStatic): CAxiosResult;
+export declare function cAxios(
+  config?: AxiosRequestConfig & { cancelRepeat: boolean },
+  axios?: AxiosStatic
+): CAxiosResult;
 
 export declare class VAxios {
   static install: install;
