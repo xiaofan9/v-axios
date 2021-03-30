@@ -13,7 +13,7 @@ const replace = require('@rollup/plugin-replace')
 const cleanup = require('rollup-plugin-cleanup')
 const rm = require("rimraf");
 
-const deps = Object.keys(Object.assign({}, pkg.dependencies))
+const deps = ["axios", ...Object.keys(Object.assign({}, pkg.dependencies))]
 const foldPath = path.resolve(__dirname, `..`)
 const input = path.resolve(foldPath, "src/index.js")
 const outputConfig = {
