@@ -128,17 +128,19 @@ function cAxios(config = {}, axios) {
   obj.request = (url, method) => {
     const isQuery = queryMethodList.includes(method.toLocaleLowerCase());
 
-    return (data = {}, opts = {}) => {
+    return (data, opts = {}) => {
       return obj
         .axios({
           url,
           method,
-          ...(isQuery ? { params: data } : { data }),
+          ...(data ? (isQuery ? { params: data } : { data }) : {}),
           ...opts,
         })
         .then((res = {}) => {
           const data = res?.data ?? {};
           data.__$res = res;
+
+          Reflect.deleteProperty(data.__$res, "data");
 
           return data;
         });

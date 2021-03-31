@@ -1,18 +1,21 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { AxiosStatic, AxiosRequestConfig, Method } from "axios";
 
-declare interface result {
+declare interface GetRes {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   <T = any>(params?: T, opt?: AxiosRequestConfig): Promise<any>;
+}
+
+declare interface PostRes {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   <T = any>(data?: T, opt?: AxiosRequestConfig): Promise<any>;
 }
 
-declare function request(url: string, method: Method): result;
+declare function request(url: string, method: Method): GetRes | PostRes;
 
-declare function get(url: string): result;
+declare function get(url: string): GetRes;
 
-declare function post(url: string): result;
+declare function post(url: string): PostRes;
 
 export type CAxiosResult = {
   request: typeof request;
