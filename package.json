@@ -6,9 +6,9 @@
   "module": "dist/v-axios.esm.js",
   "scripts": {
     "build": "node ./build/build.js",
-    "build:publish": "npm run build && npm publish --tag beta"
+    "build:publish": "npm run build && npm publish"
   },
-  "typings": "types/index.d.ts",
+  "typings": "types/index.d.ts",https://github.com/xiaofan9/v-axios/blob/master/package.json
   "unpkg": "dist/v-axios.js",
   "files": [
     "src",
