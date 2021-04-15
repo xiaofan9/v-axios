@@ -63,25 +63,23 @@ function cancelRepeat(axios) {
   axios.interceptors.request.eject(reqInterceptor);
   axios.interceptors.response.eject(resInterceptor);
 
-  reqInterceptor = axios.interceptors.request.use([
-    (config) => {
-      const source = CancelToken.source();
-      const key = config.method + ": " + config.url;
+  reqInterceptor = axios.interceptors.request.use((config) => {
+    const source = CancelToken.source();
+    const key = config.method + ": " + config.url;
 
-      if (cancelList.has(key)) {
-        const source = cancelList.get(key);
+    if (cancelList.has(key)) {
+      const source = cancelList.get(key);
 
-        source.cancel("取消重复的请求，" + key);
-      }
+      source.cancel("取消重复的请求，" + key);
+    }
 
-      cancelList.set(key, source);
-      config.cancelToken = source.token;
+    cancelList.set(key, source);
+    config.cancelToken = source.token;
 
-      return Promise.resolve(config);
-    },
-  ]);
+    return Promise.resolve(config);
+  });
 
-  resInterceptor = axios.interceptors.response.use([
+  resInterceptor = axios.interceptors.response.use(
     (res) => {
       const config = res.config;
 
@@ -97,8 +95,8 @@ function cancelRepeat(axios) {
       }
 
       return Promise.reject(err);
-    },
-  ]);
+    }
+  );
 }
 
 function cAxios(config = {}, axios) {
