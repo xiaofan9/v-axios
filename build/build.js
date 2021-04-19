@@ -75,7 +75,8 @@ const runBuild = async () => {
           sourceMap: false
         }),
         replace({
-          'process.env.NODE_ENV': JSON.stringify('production')
+          'process.env.NODE_ENV': JSON.stringify('production'),
+          preventAssignment: true
         }),
         babel({
           babelHelpers: "runtime",

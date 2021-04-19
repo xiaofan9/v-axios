@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import pkg from "../package.json";
+import { isEqual } from "lodash-es";
 
 const version = pkg.version;
 const cancelList = new Map();
+const configList = new Map();
 const queryMethodList = ["get", "delete", "head", "options"];
 
 let reqInterceptor,
@@ -55,6 +57,7 @@ function handleDelCancelList(config) {
   const key = config.method + ": " + config.url;
 
   cancelList.delete(key);
+  configList.delete(key);
 }
 
 function cancelRepeat(axios) {
@@ -68,12 +71,17 @@ function cancelRepeat(axios) {
     const key = config.method + ": " + config.url;
 
     if (cancelList.has(key)) {
-      const source = cancelList.get(key);
+      const { params, data } = configList.get(key);
 
-      source.cancel("取消重复的请求，" + key);
+      if (isEqual(config.params, params) && isEqual(config.data, data)) {
+        const source = cancelList.get(key);
+
+        source.cancel("取消重复的请求，" + key);
+      }
     }
 
     cancelList.set(key, source);
+    configList.set(key, config);
     config.cancelToken = source.token;
 
     return Promise.resolve(config);
