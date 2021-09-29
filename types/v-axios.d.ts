@@ -23,7 +23,7 @@ export declare const version: string;
 export declare const axios: AxiosStatic;
 
 export declare function cAxios(
-  config?: AxiosRequestConfig & { cancelRepeat: boolean },
+  config?: AxiosRequestConfig & { cancelRepeat?: boolean },
   axios?: AxiosStatic
 ): CAxiosResult;
 
