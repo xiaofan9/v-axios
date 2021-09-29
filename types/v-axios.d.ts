@@ -11,23 +11,12 @@ declare interface PostRes {
   <T = any>(data?: T, opt?: AxiosRequestConfig): Promise<any>;
 }
 
-declare function request(url: string, method: Method): GetRes | PostRes;
-
-declare function get(url: string): GetRes;
-
-declare function post(url: string): PostRes;
-
 export type CAxiosResult = {
-  request: typeof request;
-  get: typeof get;
-  post: typeof post;
+  request: (url: string, method: Method) => GetRes | PostRes;
+  get: (url: string) => GetRes;
+  post: (url: string) => PostRes;
   axios: AxiosStatic;
 };
-
-export declare interface install {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (app: any, axios?: AxiosStatic): void;
-}
 
 export declare const version: string;
 
@@ -39,7 +28,8 @@ export declare function cAxios(
 ): CAxiosResult;
 
 export declare class VAxios {
-  static install: install;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  static install: (app: any, axios?: AxiosStatic) => void;
 
   static version: typeof version;
 }

@@ -3,4 +3,4 @@ import "./vue";
 
 export default VAxios;
 
-export { install, axios, get, post, cAxios, request, version } from "./v-axios";
+export { axios, cAxios, version } from "./v-axios";
