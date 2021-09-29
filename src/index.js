@@ -125,6 +125,10 @@ function cAxios(config = {}, axios) {
     axios.prototype.isCancel = axios_.isCancel;
     axios.prototype.all = axios_.all;
     axios.prototype.spread = axios_.spread;
+  } else if(obj.axios.defaults) {
+    for(const key of Object.keys(config)) {
+      obj.axios.defaults[key] = config[key];
+    }
   }
 
   if (isCancelRepeat) {
