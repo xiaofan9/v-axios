@@ -125,8 +125,8 @@ function cAxios(config = {}, axios) {
     axios.prototype.isCancel = axios_.isCancel;
     axios.prototype.all = axios_.all;
     axios.prototype.spread = axios_.spread;
-  } else if(obj.axios.defaults) {
-    for(const key of Object.keys(config)) {
+  } else if (obj.axios.defaults) {
+    for (const key of Object.keys(config)) {
       obj.axios.defaults[key] = config[key];
     }
   }
@@ -147,10 +147,15 @@ function cAxios(config = {}, axios) {
           ...opts,
         })
         .then((res = {}) => {
-          const data = res?.data ?? {};
-          data.__$res = res;
+          let data = res?.data ?? {};
 
-          Reflect.deleteProperty(data.__$res, "data");
+          if (typeof data === 'string') {
+            data = res;
+          } else {
+            data.__$res = res;
+
+            Reflect.deleteProperty(data.__$res, "data");
+          }
 
           return data;
         });
